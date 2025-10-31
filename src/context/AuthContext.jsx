@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Configure axios defaults
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -16,7 +20,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Set up axios defaults
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://cloudbase-backend.onrender.com';
+  console.log('API Base URL:', API_BASE_URL); // Debug log
   axios.defaults.baseURL = API_BASE_URL;
 
   useEffect(() => {
